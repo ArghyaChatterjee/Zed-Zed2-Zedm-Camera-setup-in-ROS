@@ -86,6 +86,7 @@ mkdir -p ~/zed_ros2_ws/src/
 cd ~/zed_ros2_ws/src/ 
 git clone  --recursive https://github.com/stereolabs/zed-ros2-wrapper.git
 cd zed-ros2-wrapper
+git checkout tags/humble-v4.1.4
 git submodule update --init --recursive
 cd ../..
 sudo apt update
