@@ -85,7 +85,9 @@ source /opt/ros/humble/setup.bash # for ubuntu 22.04 with ros humble installed
 mkdir -p ~/zed_ros2_ws/src/ 
 cd ~/zed_ros2_ws/src/ 
 git clone  --recursive https://github.com/stereolabs/zed-ros2-wrapper.git
-cd ..
+cd zed-ros2-wrapper
+git submodule update --init --recursive
+cd ../..
 sudo apt update
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y # install dependencies
