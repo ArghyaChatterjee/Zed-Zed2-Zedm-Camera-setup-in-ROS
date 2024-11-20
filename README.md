@@ -1,8 +1,6 @@
 # Zed-Zed2-Zedm-Camera-setup-with-ROS2
 This is for zed camera setup and ros2 node launch.
 
-# Publish, Record and Replay ros2 bags
-
 # System Requirements
 For this demo, we are using Ubuntu 22.04, ROS2 (ROS Humble), Nvidia Driver 535, Cuda 12.1 and ZED SDK 4.1.4 (pyzed-4.1) and python 3.10. 
 
