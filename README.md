@@ -55,11 +55,13 @@ cd scripts
 python3 get_python_api.py
 ```
 
+## Monitor System Performance
 - To monitor system performance during the task allocated, you can open Activities Overview--->System Monitor. Alternatively, you can also install 'htop' to monitor system parameters in a unique way. In a new terminal, run:
 ```
 sudo snap install nvtop
 nvtop
 ```
+## Monitor nvidia gpu memory usage
 - To monitor your nvidia gpu memory usage during a certain gpu intensive task, install 'glances' & check by running the following command in a new terminal:
 ```
 sudo python3 -m pip install glances[gpu]
