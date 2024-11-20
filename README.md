@@ -9,13 +9,13 @@ The default download should be in your "Downloads" directory. To check, run in a
 cd ~/Downloads
 ls
 ```
-You should see a file in the name of ZED_SDK_Ubuntu18_cuda10.2_v3.1.2.run or something similar. Now change the permission of the file so that you can execute it from the terminal.
+You should see a file in the name of ZED_SDK_Ubuntu18_cuda12.1_v4.1.4.run or something similar. Now change the permission of the file so that you can execute it from the terminal.
 ```
-chmod +x ZED_SDK_Ubuntu18_cuda10.2_v3.1.2.run
+chmod +x ZED_SDK_Ubuntu18_cuda12.1_v4.1.4.run
 ```
 Now, the file is executable. Run the following command:
 ```
-./ZED_SDK_Ubuntu18_cuda10.2_v3.1.2.run
+./ZED_SDK_Ubuntu18_cuda12.1_v4.1.4.run
 ```
 Follow the instruction & the necessary files and libraries will automatically be installed in to the system. To check installation, run the following command:
 ```
@@ -64,3 +64,56 @@ nvtop
 sudo python3 -m pip install glances[gpu]
 sudo glances
 ```
+# Setup ZED ROS2:
+## Installation
+
+### Prerequisites
+
+- [Ubuntu 20.04 (Focal Fossa)](https://releases.ubuntu.com/focal/) or [Ubuntu 22.04 (Jammy Jellyfish)](https://releases.ubuntu.com/jammy/)
+- [ZED SDK](https://www.stereolabs.com/developers/release/latest/) v4.2 (for older versions support please check the [releases](https://github.com/stereolabs/zed-ros2-wrapper/releases))
+- [CUDA](https://developer.nvidia.com/cuda-downloads) dependency
+- ROS 2 Foxy Fitxroy or ROS 2 Humble Hawksbill: 
+  - [Foxy on Ubuntu 20.04](https://docs.ros.org/en/foxy/Installation/Linux-Install-Debians.html) -> Close to EOL
+  - [Humble on Ubuntu 22.04](https://docs.ros.org/en/humble/Installation/Linux-Install-Debians.html)
+
+### Build the package
+
+The **zed_ros2_wrapper** is a [colcon](http://design.ros2.org/articles/build_tool.html) package. Set up your colcon workspace yet, please follow this short [tutorial](https://index.ros.org/doc/ros2/Tutorials/Colcon-Tutorial/).
+
+To install the **zed_ros2_wrapper**, clone the package, and build it:
+
+```bash
+mkdir -p ~/zed_ros2_ws/src/ 
+cd ~/zed_ros2_ws/src/ 
+git clone  --recursive https://github.com/stereolabs/zed-ros2-wrapper.git
+cd ..
+sudo apt update
+rosdep update
+rosdep install --from-paths src --ignore-src -r -y # install dependencies
+colcon build --symlink-install --cmake-args=-DCMAKE_BUILD_TYPE=Release --parallel-workers $(nproc) 
+echo source $(pwd)/install/local_setup.bash >> ~/.bashrc
+source ~/.bashrc
+```
+
+If `rosdep` is missing you can install it with:
+```
+sudo apt-get install python3-rosdep python3-rosinstall-generator python3-vcstool python3-rosinstall build-essential`
+```
+# Start ZED ROS2 Node:
+
+To start the ZED node, open a bash terminal and use the [CLI](https://index.ros.org/doc/ros2/Tutorials/Introspection-with-command-line-tools/) command `ros2 launch`:
+
+```bash
+ros2 launch zed_wrapper zed_camera.launch.py camera_model:=<camera_model>
+```
+
+Replace `<camera_model>` with the model of the camera that you are using: `'zed'`, `'zedm'`, `'zed2'`, `'zed2i'`, `'zedx'`, `'zedxm'`, `'virtual'`,`'zedxonegs'`,`'zedxone4k'`.
+
+The `zed_camera.launch.py` is Python launch scripts that automatically start the ZED node using ["manual composition"](https://index.ros.org/doc/ros2/Tutorials/Composition/). The parameters for the indicated camera model are loaded from the relative "YAML files". A Robot State Publisher node is started to publish the camera static links and joints loaded from the URDF model associated with the camera model.
+
+> :pushpin: **Note:** You can set your own configurations by modifying the parameters in the files **common_stereo.yaml**, **zed.yaml** **zedm.yaml**, **zed2.yaml**, **zed2i.yaml**, **zedx.yaml**, **zedxm.yaml**, **common_mono.yaml**, **zedxonegs.yaml**, and **zedxone4k.yaml**  available in the folder `zed_wrapper/config`.
+
+# ZED ROS2 Networking
+we recommend reading this ROS 2 [tuning guide](https://www.stereolabs.com/docs/ros2/150_dds_and_network_tuning) to improve the ROS 2 experience with ZED.
+
+
