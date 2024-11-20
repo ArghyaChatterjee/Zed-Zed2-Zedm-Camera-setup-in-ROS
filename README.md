@@ -33,34 +33,33 @@ ctrl+c              # To stop it
 ctrl+c              # To stop it
 ```
 ## ZED Python API Installation:
-Run the following command before installing zed python api on your pc. Make sure that python3, pip & Open CV are already installed. 
+- Run the following command before installing zed python api on your pc. Make sure that python3, pip & Open CV are already installed. 
 ```
 cd ~
 python3 -m pip install numpy pyopengl
 ```
-Now move to zed sdk directory to download zed python api. Run the following command:
+- Now move to zed sdk directory to download zed python api. Run the following command:
 ```
 cd /usr/local/zed
 python3 get_python_api.py
 ```
-The system will automatically download a wheel file in the current directory. To install it, run:
+- The system will automatically download a wheel file in the current directory. To install it, run:
 ```
 python3 -m pip install pyzed-3.1-cp36-cp36m-linux_x86_64.whl
 ```
-To check successful installation, run:
+- To check successful installation, run:
 ```
 cd ~
 python3
 import pyzed.sl as sl
 ```
 The file should successfully import without showing any error. 
-```
-To monitor system performance during the task allocated, you can open Activities Overview--->System Monitor. Alternatively, you can also install 'htop' to monitor system parameters in a unique way. In a new terminal, run:
+- To monitor system performance during the task allocated, you can open Activities Overview--->System Monitor. Alternatively, you can also install 'htop' to monitor system parameters in a unique way. In a new terminal, run:
 ```
 sudo snap install nvtop
 nvtop
 ```
-To monitor your nvidia gpu memory usage during a certain gpu intensive task, install 'glances' & check by running the following command in a new terminal:
+- To monitor your nvidia gpu memory usage during a certain gpu intensive task, install 'glances' & check by running the following command in a new terminal:
 ```
 sudo python3 -m pip install glances[gpu]
 sudo glances
