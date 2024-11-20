@@ -1,7 +1,9 @@
 # Zed-Zed2-Zedm-Camera-setup-with-ROS2
-This is for zed camera setup.
+This is for zed camera setup and ros2 node launch.
+
 # ZED-Camera-SDK-ZED-Python-API-Installation-and-Object-Detection-Demo
 It's a repository to use ZED camera with ZED SDK &amp; ZED Python API for Object detection with Tensorflow.
+
 ## ZED Camera SDK Installation:
 Download the Latest SDK version from the site: https://www.stereolabs.com/developers/release/.
 The default download should be in your "Downloads" directory. To check, run in a terminal:
@@ -11,11 +13,11 @@ ls
 ```
 You should see a file in the name of ZED_SDK_Ubuntu18_cuda12.1_v4.1.4.run or something similar. Now change the permission of the file so that you can execute it from the terminal.
 ```
-chmod +x ZED_SDK_Ubuntu18_cuda12.1_v4.1.4.run
+chmod +x ZED_SDK_Ubuntu22_cuda12.1_v4.1.4.run
 ```
 Now, the file is executable. Run the following command:
 ```
-./ZED_SDK_Ubuntu18_cuda12.1_v4.1.4.run
+./ZED_SDK_Ubuntu22_cuda12.1_v4.1.4.run
 ```
 Follow the instruction & the necessary files and libraries will automatically be installed in to the system. To check installation, run the following command:
 ```
