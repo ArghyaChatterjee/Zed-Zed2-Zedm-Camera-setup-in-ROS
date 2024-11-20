@@ -1,9 +1,6 @@
 # Zed-Zed2-Zedm-Camera-setup-with-ROS2
 This is for zed camera setup and ros2 node launch.
 
-# ZED-Camera-SDK-ZED-Python-API-Installation-and-Object-Detection-Demo
-It's a repository to use ZED camera with ZED SDK &amp; ZED Python API for Object detection with Tensorflow.
-
 ## ZED Camera SDK Installation:
 Download the Latest SDK version from the site: https://www.stereolabs.com/developers/release/.
 The default download should be in your "Downloads" directory. To check, run in a terminal:
