@@ -39,14 +39,14 @@ ctrl+c              # To stop it
 # ZED Camera Setup
 ## Clone this repo:
 ```bash
-git clone https://github.com/ihmcrobotics/perception-data-logger.git
-cd perception-data-logger/publish_record_and_replay_ros2bags
+git clone https://github.com/ArghyaChatterjee/zed-zed2-zedm-zed-x-camera-setup-in-ros2.git
+cd zed-zed2-zedm-zed-x-camera-setup-in-ros2/
 ```
 
 ## Create a Virtualenv:
 ```bash
-python3 -m venv publish_record_and_replay_ros2bags_venv
-source publish_record_and_replay_ros2bags_venv/bin/activate
+python3 -m venv zed_zed2_zedm_zed_x_camera_setup_in_ros2_venv
+source venv zed_zed2_zedm_zed_x_camera_setup_in_ros2_venv/bin/activate
 pip3 install --upgrade pip
 pip3 install -r requirements.txt
 ```
@@ -123,7 +123,7 @@ ros2 bag record /tf /tf_static /zed/depth/neural /zed/left/camera_info /zed/left
 ros2 bag record -a -o ros2_bag_name --compression-mode file --compression-format zstd 
 # record excluding a specific topic
 ros2 bag record -a --exclude "/topic_to_exclude" -o ros2_bag_name
-
+```
 
 # ZED ROS2 Networking
 we recommend reading this ROS 2 [tuning guide](https://www.stereolabs.com/docs/ros2/150_dds_and_network_tuning) to improve the ROS 2 experience with ZED.
