@@ -1,18 +1,23 @@
 # Zed-Zed2-Zedm-Camera-setup-with-ROS2
 This is for zed camera setup and ros2 node launch.
 
-## ZED Camera SDK Installation:
+# Publish, Record and Replay ros2 bags
+
+# System Requirements
+For this demo, we are using Ubuntu 22.04, ROS2 (ROS Humble), Nvidia Driver 535, Cuda 12.1 and ZED SDK 4.1.4 (pyzed-4.1) and python 3.10. 
+
+# ZED Camera SDK Installation:
 Download the Latest SDK version from the site: https://www.stereolabs.com/developers/release/.
 The default download should be in your "Downloads" directory. To check, run in a terminal:
 ```
 cd ~/Downloads
 ls
 ```
-You should see a file in the name of ZED_SDK_Ubuntu18_cuda12.1_v4.1.4.run or something similar. Now change the permission of the file so that you can execute it from the terminal.
+You should see a file in the name of ZED_SDK_Ubuntu22_cuda12.1_v4.1.4.run or something similar. Change the permission of the file so that you can execute it from the terminal.
 ```
 chmod +x ZED_SDK_Ubuntu22_cuda12.1_v4.1.4.run
 ```
-Now, the file is executable. Run the following command:
+Run the following command to install zed sdk:
 ```
 ./ZED_SDK_Ubuntu22_cuda12.1_v4.1.4.run
 ```
@@ -24,35 +29,34 @@ ls
 You should see some executables. Try to run them one by one. After starting an executable, to stop it, hit ctrl+c. Now run the following command:
 ```
 
-./ZED_Explorer      # To start an example
+./ZED_Explorer      # To start playing, recording and loading sensor data (svo2)
 ctrl+c              # To stop it
-./ZED_Depth_Viewer  # To start another example
+./ZED_Depth_Viewer  # To start playing and loading data (svo2) for depth and point cloud visualization
 ctrl+c              # To stop it
-./ZEDfu             # To start another example
+./ZEDfu             # To start playing and loading data (svo2) for trajectory and map visualization
 ctrl+c              # To stop it
 ```
-## ZED Python API Installation:
-- Run the following command before installing zed python api on your pc. Make sure that python3, pip & Open CV are already installed. 
+# ZED Camera Setup
+## Clone this repo:
+```bash
+git clone https://github.com/ihmcrobotics/perception-data-logger.git
+cd perception-data-logger/publish_record_and_replay_ros2bags
 ```
-cd ~
-python3 -m pip install numpy pyopengl
+
+## Create a Virtualenv:
+```bash
+python3 -m venv publish_record_and_replay_ros2bags_venv
+source publish_record_and_replay_ros2bags_venv/bin/activate
+pip3 install --upgrade pip
+pip3 install -r requirements.txt
 ```
-- Now move to zed sdk directory to download zed python api. Run the following command:
-```
-cd /usr/local/zed
+
+## Install python api for ZED
+```bash
+cd scripts
 python3 get_python_api.py
 ```
-- The system will automatically download a wheel file in the current directory. To install it, run:
-```
-python3 -m pip install pyzed-3.1-cp36-cp36m-linux_x86_64.whl
-```
-- To check successful installation, run:
-```
-cd ~
-python3
-import pyzed.sl as sl
-```
-The file should successfully import without showing any error. 
+
 - To monitor system performance during the task allocated, you can open Activities Overview--->System Monitor. Alternatively, you can also install 'htop' to monitor system parameters in a unique way. In a new terminal, run:
 ```
 sudo snap install nvtop
@@ -63,15 +67,9 @@ nvtop
 sudo python3 -m pip install glances[gpu]
 sudo glances
 ```
-# Setup ZED ROS2:
-## Installation
+# Setup ZED ROS2
 
 ### Prerequisites
-
-- [Ubuntu 20.04 (Focal Fossa)](https://releases.ubuntu.com/focal/) or [Ubuntu 22.04 (Jammy Jellyfish)](https://releases.ubuntu.com/jammy/)
-- [ZED SDK](https://www.stereolabs.com/developers/release/latest/) v4.2 (for older versions support please check the [releases](https://github.com/stereolabs/zed-ros2-wrapper/releases))
-- [CUDA](https://developer.nvidia.com/cuda-downloads) dependency
-- ROS 2 Foxy Fitxroy or ROS 2 Humble Hawksbill: 
   - [Foxy on Ubuntu 20.04](https://docs.ros.org/en/foxy/Installation/Linux-Install-Debians.html) -> Close to EOL
   - [Humble on Ubuntu 22.04](https://docs.ros.org/en/humble/Installation/Linux-Install-Debians.html)
 
@@ -82,6 +80,8 @@ The **zed_ros2_wrapper** is a [colcon](http://design.ros2.org/articles/build_too
 To install the **zed_ros2_wrapper**, clone the package, and build it:
 
 ```bash
+source /opt/ros/humble/setup.bash # for ubuntu 22.04 with ros humble installed
+# source /opt/ros/foxy/setup.bash # for ubuntu 20.04 with ros foxy installed
 mkdir -p ~/zed_ros2_ws/src/ 
 cd ~/zed_ros2_ws/src/ 
 git clone  --recursive https://github.com/stereolabs/zed-ros2-wrapper.git
@@ -98,7 +98,7 @@ If `rosdep` is missing you can install it with:
 ```
 sudo apt-get install python3-rosdep python3-rosinstall-generator python3-vcstool python3-rosinstall build-essential`
 ```
-# Start ZED ROS2 Node:
+### Start ZED ROS2 Node:
 
 To start the ZED node, open a bash terminal and use the [CLI](https://index.ros.org/doc/ros2/Tutorials/Introspection-with-command-line-tools/) command `ros2 launch`:
 
@@ -111,6 +111,19 @@ Replace `<camera_model>` with the model of the camera that you are using: `'zed'
 The `zed_camera.launch.py` is Python launch scripts that automatically start the ZED node using ["manual composition"](https://index.ros.org/doc/ros2/Tutorials/Composition/). The parameters for the indicated camera model are loaded from the relative "YAML files". A Robot State Publisher node is started to publish the camera static links and joints loaded from the URDF model associated with the camera model.
 
 > :pushpin: **Note:** You can set your own configurations by modifying the parameters in the files **common_stereo.yaml**, **zed.yaml** **zedm.yaml**, **zed2.yaml**, **zed2i.yaml**, **zedx.yaml**, **zedxm.yaml**, **common_mono.yaml**, **zedxonegs.yaml**, and **zedxone4k.yaml**  available in the folder `zed_wrapper/config`.
+
+# Record ROS2 topics in a rosbag
+Now, record the ros2 topics in a rosbag.
+```bash
+# record all topic
+ros2 bag record -a -o ros2_bag_name
+# record specific topic
+ros2 bag record /tf /tf_static /zed/depth/neural /zed/left/camera_info /zed/left/image_raw /zed/pointcloud /zed/pose /zed/right/camera_info /zed/right/image_raw  -o ros2_bag_name
+# record mentioning compression mode
+ros2 bag record -a -o ros2_bag_name --compression-mode file --compression-format zstd 
+# record excluding a specific topic
+ros2 bag record -a --exclude "/topic_to_exclude" -o ros2_bag_name
+
 
 # ZED ROS2 Networking
 we recommend reading this ROS 2 [tuning guide](https://www.stereolabs.com/docs/ros2/150_dds_and_network_tuning) to improve the ROS 2 experience with ZED.
