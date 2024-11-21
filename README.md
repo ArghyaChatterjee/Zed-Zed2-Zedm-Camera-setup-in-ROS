@@ -130,6 +130,108 @@ ros2 launch zed_wrapper zed_camera.launch.py camera_model:=<camera_model>
 
 Replace `<camera_model>` with the model of the camera that you are using: `'zed'`, `'zedm'`, `'zed2'`, `'zed2i'`, `'zedx'`, `'zedxm'`, `'virtual'`,`'zedxonegs'`,`'zedxone4k'`.
 
+```
+arghya@arghya-Pulse-GL66-12UEK:~/zed_ros2_ws$ ros2 topic list
+/clicked_point
+/diagnostics
+/goal_pose
+/initialpose
+/parameter_events
+/rosout
+/tf
+/tf_static
+/zed/joint_states
+/zed/plane
+/zed/plane_marker
+/zed/plane_marker_array
+/zed/robot_description
+/zed/zed_node/confidence/confidence_map
+/zed/zed_node/depth/camera_info
+/zed/zed_node/depth/depth_info
+/zed/zed_node/depth/depth_registered
+/zed/zed_node/depth/depth_registered/compressed
+/zed/zed_node/depth/depth_registered/compressedDepth
+/zed/zed_node/depth/depth_registered/theora
+/zed/zed_node/disparity/disparity_image
+/zed/zed_node/imu/data
+/zed/zed_node/imu/data_raw
+/zed/zed_node/left/camera_info
+/zed/zed_node/left/image_rect_color
+/zed/zed_node/left/image_rect_color/compressed
+/zed/zed_node/left/image_rect_color/compressedDepth
+/zed/zed_node/left/image_rect_color/theora
+/zed/zed_node/left_cam_imu_transform
+/zed/zed_node/left_gray/camera_info
+/zed/zed_node/left_gray/image_rect_gray
+/zed/zed_node/left_gray/image_rect_gray/compressed
+/zed/zed_node/left_gray/image_rect_gray/compressedDepth
+/zed/zed_node/left_gray/image_rect_gray/theora
+/zed/zed_node/left_raw/camera_info
+/zed/zed_node/left_raw/image_raw_color
+/zed/zed_node/left_raw/image_raw_color/compressed
+/zed/zed_node/left_raw/image_raw_color/compressedDepth
+/zed/zed_node/left_raw/image_raw_color/theora
+/zed/zed_node/left_raw_gray/camera_info
+/zed/zed_node/left_raw_gray/image_raw_gray
+/zed/zed_node/left_raw_gray/image_raw_gray/compressed
+/zed/zed_node/left_raw_gray/image_raw_gray/compressedDepth
+/zed/zed_node/left_raw_gray/image_raw_gray/theora
+/zed/zed_node/odom
+/zed/zed_node/path_map
+/zed/zed_node/path_odom
+/zed/zed_node/point_cloud/cloud_registered
+/zed/zed_node/pose
+/zed/zed_node/pose/status
+/zed/zed_node/pose_with_covariance
+/zed/zed_node/rgb/camera_info
+/zed/zed_node/rgb/image_rect_color
+/zed/zed_node/rgb/image_rect_color/compressed
+/zed/zed_node/rgb/image_rect_color/compressedDepth
+/zed/zed_node/rgb/image_rect_color/theora
+/zed/zed_node/rgb_gray/camera_info
+/zed/zed_node/rgb_gray/image_rect_gray
+/zed/zed_node/rgb_gray/image_rect_gray/compressed
+/zed/zed_node/rgb_gray/image_rect_gray/compressedDepth
+/zed/zed_node/rgb_gray/image_rect_gray/theora
+/zed/zed_node/rgb_raw/camera_info
+/zed/zed_node/rgb_raw/image_raw_color
+/zed/zed_node/rgb_raw/image_raw_color/compressed
+/zed/zed_node/rgb_raw/image_raw_color/compressedDepth
+/zed/zed_node/rgb_raw/image_raw_color/theora
+/zed/zed_node/rgb_raw_gray/camera_info
+/zed/zed_node/rgb_raw_gray/image_raw_gray
+/zed/zed_node/rgb_raw_gray/image_raw_gray/compressed
+/zed/zed_node/rgb_raw_gray/image_raw_gray/compressedDepth
+/zed/zed_node/rgb_raw_gray/image_raw_gray/theora
+/zed/zed_node/right/camera_info
+/zed/zed_node/right/image_rect_color
+/zed/zed_node/right/image_rect_color/compressed
+/zed/zed_node/right/image_rect_color/compressedDepth
+/zed/zed_node/right/image_rect_color/theora
+/zed/zed_node/right_gray/camera_info
+/zed/zed_node/right_gray/image_rect_gray
+/zed/zed_node/right_gray/image_rect_gray/compressed
+/zed/zed_node/right_gray/image_rect_gray/compressedDepth
+/zed/zed_node/right_gray/image_rect_gray/theora
+/zed/zed_node/right_raw/camera_info
+/zed/zed_node/right_raw/image_raw_color
+/zed/zed_node/right_raw/image_raw_color/compressed
+/zed/zed_node/right_raw/image_raw_color/compressedDepth
+/zed/zed_node/right_raw/image_raw_color/theora
+/zed/zed_node/right_raw_gray/camera_info
+/zed/zed_node/right_raw_gray/image_raw_gray
+/zed/zed_node/right_raw_gray/image_raw_gray/compressed
+/zed/zed_node/right_raw_gray/image_raw_gray/compressedDepth
+/zed/zed_node/right_raw_gray/image_raw_gray/theora
+/zed/zed_node/stereo/image_rect_color
+/zed/zed_node/stereo/image_rect_color/compressed
+/zed/zed_node/stereo/image_rect_color/compressedDepth
+/zed/zed_node/stereo/image_rect_color/theora
+/zed/zed_node/stereo_raw/image_raw_color
+/zed/zed_node/stereo_raw/image_raw_color/compressed
+/zed/zed_node/stereo_raw/image_raw_color/compressedDepth
+/zed/zed_node/stereo_raw/image_raw_color/theora
+```
 The `zed_camera.launch.py` is Python launch scripts that automatically start the ZED node using ["manual composition"](https://index.ros.org/doc/ros2/Tutorials/Composition/). The parameters for the indicated camera model are loaded from the relative "YAML files". A Robot State Publisher node is started to publish the camera static links and joints loaded from the URDF model associated with the camera model.
 
 ### Set Configurations and Resolutions
@@ -139,6 +241,8 @@ If you want to change the resolution of the images publishing, change 2 things.
 - Change `grab_resolution: 'HD720'` to `'HD2K', 'HD1080', 'VGA', 'AUTO'` any of them inside `zed_wrapper/config/<camera_model>.yaml`
 - Change `pub_resolution: "CUSTOM"` to `pub_resolution: "NATIVE"` inside `zed_wrapper/config/common.yaml`
 
+There are in total 5 depth mode which are `Performance`, `Quality`, `Ultra`, `Neural`, `Neural +`. If you want to change the default depth mode:
+- Change `depth_mode: "ULTRA"` to `'PERFORMANCE', 'QUALITY', 'ULTRA', 'NEURAL', 'NEURAL_PLUS'`
 
 # Record ZED ROS2 topics in a rosbag
 Now, record the ros2 topics in a rosbag.
